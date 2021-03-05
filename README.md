@@ -14,7 +14,7 @@ All of these can be combined in a sequence to form a string in `order2_rule`. Fo
 ```julia
 order2_rule = ">>+"
 ```
-The above configuration means that on each iteration we will shift the binary representation of the rule by two and add one to what we have got. Of course, the second-order rule sequence of operations is not associative and `"+>"` is not the same as `">+"`, so the order matters.
+The above configuration means that on each iteration we will shift the binary representation of the rule by two and add one to what we have got. Of course, the second-order rule sequence of operations is not commutative and `"+>"` is not the same as `">+"`, so the order matters.
 Note that `>` and `<` operations are circular, so:
 ```
 01100111
