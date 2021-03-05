@@ -1,7 +1,7 @@
 ## Config (changes allowed)
 latlen = 2000      # lattice length
-iters = 500       # iterations
-start_rule = 30   # starting rule
+iters = 500        # iterations
+start_rule = 30    # starting rule
 order2_rule = "+"  # the rule of changing the rule
            #      - no changes (regular auomata)
            # >    - shift one to the right
