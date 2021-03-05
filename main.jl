@@ -2,7 +2,7 @@
 latlen = 2000      # lattice length
 iters = 500        # iterations
 start_rule = 30    # starting rule
-order2_rule = "+"  # the rule of changing the rule
+order2_rule = ""   # the rule of changing the rule
            #      - no changes (regular auomata)
            # >    - shift one to the right
            # >>   - shift two to the right
@@ -95,7 +95,9 @@ if occursin("r", init)
 elseif occursin(".", init)
     push!(data, [((i==round(latlen/2)) ? 1 : 0) for i::Int in range(0, length=latlen)])
 elseif occursin("a", init)
-    data = [copy(init_arr)]
+    push!(data, init_arr)
+elseif occursin(":", init)
+    push!(data, [i%2 for i::Int in range(0, length=latlen)])
 end
 if occursin("i", init)
     data = [[abs(i-1) for i::Int in data[1]]]
