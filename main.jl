@@ -51,7 +51,7 @@ random start:
 =#
 
 
-## Config pricessing (changes not recommended)
+## Config processing (changes not recommended)
 # rule is a vector of integers (1s and 0s)
 rule = [Int(i)-48 for i::Char in Base.bin(Unsigned(start_rule), 8, false)]
 
