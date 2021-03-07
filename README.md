@@ -27,3 +27,10 @@ All the code was originally implemented in Julia v1.4. I have used matplotlib fo
 All the configurations to select a specific automaton can be accessed in the first block of code.
 ## License
 The code of the experiment is provided under the MIT license. Please, leave a credit to me (Atell Krasnopolski) and this repository, in case you use this software as a tool for your experiments/research or if you develop or mention any of my ideas presented here (specific implementation of dynamic rule cellular automata, bit shift on rules, etc).
+## Examples
+40+
+![40+](40+.png)
+60>|<
+![60>|<](60>|<.png)
+105>>+
+![105>>+](105>>+.png)
