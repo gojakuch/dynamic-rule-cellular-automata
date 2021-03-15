@@ -22,7 +22,7 @@ Note that `>` and `<` operations are circular, so:
 perform '>'
 10110011
 ```
-The `"!"` second-order rule has an interesting property of keeping properties of the initial rule. For example, the picture generated with `110!` rule (starting with a dot distribution) is different from simply `110` but properties persist ans the shape is similar. Rules `30!` and `30` (starting with a dot distribution again) even share the property of having a chaotic line that separates the chaotic and ordered patterns. For all tested `"!"` rules, the Wolfram class of the initial automaton persisted.
+The `"!"` second-order rule has an interesting property of keeping properties of the initial rule. For example, the picture generated with `110!` rule (starting with a dot distribution) is different from simply `110` but properties persist and the shape is similar. Rules `30!` and `30` (starting with a dot distribution again) even share the property of having a chaotic line that separates the chaotic and ordered patterns. For all tested `"!"` rules, the Wolfram class of the initial automaton persisted.
 ![110! and 110](img/110!.png)
 ## Libraries and usage
 All the code was originally implemented in Julia v1.4. I have used matplotlib for the graphics through PyPlot and PyCall (you can install those with no problem using Pkg). The code works both in Juno environment displaying graphics in the Plots section and from the terminal via the standard matplotlib view (see the last two lines of code).
