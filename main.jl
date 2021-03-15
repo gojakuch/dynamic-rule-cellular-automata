@@ -11,6 +11,7 @@ order2_rule = ""   # the rule of changing the rule
            # +    - next rule (increases Wolfram's number)
            # -    - previous rule (decreases Wolfram's number)
            # |    - flip the rule by bits (mirror)
+           # !    - perform "not" operation on each bit
            # +>>  - combination (increase rule and move two rules to the right). + operation cometh first
 init = "."        # initial distribution of cells
            # .  - dot
@@ -56,7 +57,7 @@ random start:
 rule = [Int(i)-48 for i::Char in Base.bin(Unsigned(start_rule), 8, false)]
 
 # a function to change the rule number by one
-function next_rule!(rulevec::Vector{Int}, step::Int)
+function next_rule!(rulevec::Vector{Int}, step::Int)::Nothing
     num::Int = parse(Int, join(rulevec), base=2)
     num += step
     if num > 255
@@ -71,13 +72,22 @@ function next_rule!(rulevec::Vector{Int}, step::Int)
     return nothing
 end
 
+# a function to change the rule with a bitwise "not"
+function not!(rulevec::Vector{Int})::Nothing
+    for i in 1:length(rulevec)
+        rulevec[i] = Int(rulevec[i] == 0)
+    end
+    return nothing
+end
+
 # a mapping from characters to actions (order2 rules)
 char2rule = Dict([
     '+' => r -> next_rule!(r, 1),
     '-' => r -> next_rule!(r, -1),
     '>' => r -> circshift!(r, copy(r), 1),
     '<' => r -> circshift!(r, copy(r), -1),
-    '|' => r -> reverse!(r)
+    '|' => r -> reverse!(r),
+    '!' => r -> not!(r)
 ])
 
 
