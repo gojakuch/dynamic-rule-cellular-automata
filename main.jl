@@ -1,8 +1,8 @@
 ## Config (changes allowed)
-latlen = 2000      # lattice length
-iters = 500        # iterations
-start_rule = 30    # starting rule
-order2_rule = ""   # the rule of changing the rule
+latlen = 220          # lattice length
+iters = 220           # iterations
+start_rule = 113      # starting rule
+order2_rule = ">|+"   # the rule of changing the rule
            #      - no changes (regular auomata)
            # >    - shift one to the right
            # >>   - shift two to the right
@@ -13,7 +13,7 @@ order2_rule = ""   # the rule of changing the rule
            # |    - flip the rule by bits (mirror)
            # !    - perform "not" operation on each bit
            # +>>  - combination (increase rule and move two rules to the right). + operation cometh first
-init = "."        # initial distribution of cells
+init = "r"        # initial distribution of cells
            # .  - dot
            # r  - random
            # i  - inverse
@@ -37,12 +37,16 @@ starting with dot:
 # 101 >>
 # 101 >|
 # 101 |
+# 105 >>
+# 105 >|>
+# 105 >|<
 random start:
 # 40 +
-# 40 >+<
+# 40 >+< any even?
 # 50 >|<
 # 60 >|<
 # 105 >>
+# 105 >>+
 # 110 +<
 # 110 <
 # 110 +
@@ -69,7 +73,7 @@ function next_rule!(rulevec::Vector{Int}, step::Int)::Nothing
     for i in 1:length(rulevec)
         rulevec[i] = Int(b[i])-48
     end
-    return nothing
+    nothing
 end
 
 # a function to change the rule with a bitwise "not"
@@ -77,7 +81,7 @@ function not!(rulevec::Vector{Int})::Nothing
     for i in 1:length(rulevec)
         rulevec[i] = Int(rulevec[i] == 0)
     end
-    return nothing
+    nothing
 end
 
 # a mapping from characters to actions (order2 rules)
@@ -99,15 +103,15 @@ rcParams["image.cmap"] = "binary"
 
 
 ## Data init (first line)
-data = []
+data = [] # comment this line to append the new auomaton graph to the previous one
 if occursin("r", init)
-    push!(data, [rand((0, 1)) for i::Int in range(0, length=latlen)])
+    push!(data, [rand((0, 1)) for i::Int in 1:latlen])
 elseif occursin(".", init)
-    push!(data, [((i==round(latlen/2)) ? 1 : 0) for i::Int in range(0, length=latlen)])
+    push!(data, [((i==round(latlen/2)) ? 1 : 0) for i::Int in 1:latlen])
 elseif occursin("a", init)
     push!(data, init_arr)
 elseif occursin(":", init)
-    push!(data, [i%2 for i::Int in range(0, length=latlen)])
+    push!(data, [i%2 for i::Int in 1:latlen])
 end
 if occursin("i", init)
     data = [[abs(i-1) for i::Int in data[1]]]
@@ -115,18 +119,20 @@ end
 
 
 ## The magic
+past = length(data)-1
 for iter::Int in 1:iters
+    println(parse(Int, join(rule), base=2), rule)
     new_line::Vector{Int} = []
-    for i::Int in 1:length(data[iter])
+    for i::Int in 1:length(data[past+iter])
         neigh::String = ""
         for j::Int in i-1:i+1
             aj::Unsigned = j # actual index to look at
             if (j <= 0)
-                aj = length(data[iter])-1+j
-            elseif (j > length(data[iter]))
-                aj = j - length(data[iter])
+                aj = length(data[past+iter])-1+j
+            elseif (j > length(data[past+iter]))
+                aj = j - length(data[past+iter])
             end
-            neigh *= string(data[iter][aj])
+            neigh *= string(data[past+iter][aj])
         end
         push!(new_line, rule[8-parse(Int, neigh, base=2)])
     end

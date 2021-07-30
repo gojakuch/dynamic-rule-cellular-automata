@@ -1,6 +1,7 @@
-# Dynamic Rule Cellular Automata
+# Dynamic Rule Cellular Automata (Second-Order Rules on Elementary Cellular Automata)
 The original idea of the experiment was to create a "second-order rule" for cellular automata which would modify the rule on each iteration. The "second-order rule" is represented with a string variable `order2_rule` on line five in the code. If you leave the string empty, you will get a regular elementary cellular automaton.
 Such automata are still completely deterministic, yet at times they have a bigger degree of variation and provide more space for dynamics to produce chaos and complexity. However, in many cases, especially when performing binary shifts on the rule, modified automata end up alternating full-black and full-white states after producing various branched patterns.
+For detailed information and more mathematical analysis, please read the file `paper_SOECA.pdf`.
 ## Second-order rule notation
 In this experiment, the are five basic operations that can be performed on the rule. These include:
 ```
@@ -29,7 +30,7 @@ All the code was originally implemented in Julia v1.4. I have used matplotlib fo
 ### Config
 All the configurations to select a specific automaton can be accessed in the first block of code.
 ## License
-The code of the experiment is provided under the MIT license. Please, leave a credit to me (Atell Krasnopolski) and this repository, in case you use this software as a tool for your experiments/research or if you develop or mention any of my ideas presented here (specific implementation of dynamic rule cellular automata, bit shift on rules, etc).
+The code of the experiment is provided under the MIT license. Please, leave a credit to me (Atell Krasnopolski) and this repository, in case you use this software as a tool for your experiments/research or if you develop or mention any of my ideas presented here (specific implementation of higher-order rules on cellular automata, bit shift on rules, etc). It would also be nice of you if you notified me of your work, I would be happy to hear about my ideas being continued by someone else.
 ## Examples
 40+
 ![40+](img/40+.png)
